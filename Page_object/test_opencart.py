@@ -1,8 +1,4 @@
-import time
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+PRODUCT_NAME = "Iphone13"
 
 
 def test_add_to_wish_list(main_page):
@@ -35,7 +31,6 @@ def test_add_to_cart_from_comparison(main_page):
     product_comparison_page.add_to_cart_product_comparison_page()
     shopping_cart = product_comparison_page.open_shopping_cart()
     shopping_cart.check_name_shopping_cart(product_name)
-    shopping_cart.click_checkout_button()
     login_page = shopping_cart.click_checkout_button()
     account_page = login_page.login_user()
     account_page.check_new_payment()
@@ -44,6 +39,31 @@ def test_add_to_cart_from_comparison(main_page):
 def test_add_product_admin_page(admin_page):
     products_page = admin_page.open_admin_products()
     add_product_form = products_page.add_product()
-    add_product_form.fill_product_data()
+    add_product_form.fill_product_data(PRODUCT_NAME)
     products_page = add_product_form.save_product_data()
-    products_page.check_name_added_product()
+    products_page.check_name_added_product(PRODUCT_NAME)
+
+
+def test_delete_product_admin_page(admin_page):
+    products_page = admin_page.open_admin_products()
+    products_page.click_product_checkbox(PRODUCT_NAME)
+    products_page.delete_product()
+    products_page.confirm_delete_product()
+    products_page.check_product_delete()
+
+
+def test_account_registration(main_page):
+    registration_page = main_page.open_registration_page()
+    registration_page.fill_account_data()
+    success_page = registration_page.continue_registration()
+    success_page.check_success_button()
+
+
+def test_currency_to_euro(main_page):
+    main_page.change_currency_to_euro()
+    main_page.check_euro_currency()
+
+
+def test_currency_to_gbp(main_page):
+    main_page.change_currency_to_gbp()
+    main_page.check_gbp_currency()
