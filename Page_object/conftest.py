@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.opera.options import Options as OperaOptions
 
 from pages.main_page import MainPage
-from pages.admin_page import AdminLoginPage
+from pages.admin_login_page import AdminLoginPage
 
 DRIVERS = os.path.expanduser("~/Downloads/drivers")
 
@@ -14,7 +14,7 @@ def pytest_addoption(parser):
     parser.addoption("--maximized", action="store_true", help="Maximize browser windows")
     parser.addoption("--headless", action="store_true", help="Run headless")
     parser.addoption("--browser", action="store", default="chrome", choices=["chrome", "firefox", "opera"])
-    parser.addoption("--url", action="store", default="https://demo.opencart.com/")
+    parser.addoption("--url", action="store", default="http://192.168.50.209:8081/")
 
 
 @pytest.fixture
