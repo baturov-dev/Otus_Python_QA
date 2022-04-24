@@ -5,6 +5,7 @@ import logging
 import allure
 from selenium import webdriver
 from selenium.webdriver.opera.options import Options as OperaOptions
+from pathlib import Path
 
 from Allure.pages.main_page import MainPage
 from Allure.pages.admin_login_page import AdminLoginPage
@@ -19,6 +20,14 @@ def pytest_addoption(parser):
     parser.addoption("--url", action="store", default="http://192.168.1.69:8081/")
     parser.addoption("--log_level", action="store", default="DEBUG")
     parser.addoption("--executor", action="store", default="192.168.1.69")
+
+
+@pytest.fixture(scope="session", autouse=True)
+def logs_folder():
+    folder = Path(__file__).parent.joinpath("logs")
+    if not folder.exists():
+        folder.mkdir()
+    return folder
 
 
 @pytest.fixture
