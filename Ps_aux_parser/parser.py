@@ -20,7 +20,7 @@ for string in process_info_string:
     user = data_string[0]
     memory = float(data_string[3])
     cpu = float(data_string[2])
-    process = data_string[10]
+    process = " ".join(data_string[10:])
 
     if user not in data['USERS']:
         data['USERS'][user] = 0
