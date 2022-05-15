@@ -36,7 +36,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             status = HTTPStatus(200)
 
         body = f"<div>Request Method: {method_from_request}</div>" \
-               f"<div>Request Source: {srv_addr}</div>" \
+               f"<div>Request Source: {raddr}</div>" \
                f"<div>Response Status: {status.value} {status.name}</div>" \
                f"<br></br>"
         for item in headers_from_requst:
